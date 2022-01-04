@@ -2,7 +2,7 @@ const router = require('express').Router();
 const Cart = require('../models/Cart');
 const {verifyToken, verifyTokenAndAuthorization, verifyTokenAndAdmin} = require('./tokenVerification');
 
-// CREATE cart
+/* ------------------------------- CREATE cart ------------------------------ */
 // Any registered user can create a new cart
 router.post('/', verifyTokenAndAuthorization, async (req, res) => {
     // Create a new cart model
@@ -17,7 +17,7 @@ router.post('/', verifyTokenAndAuthorization, async (req, res) => {
     }
 });
 
-// UPDATE cart
+/* ------------------------------- UPDATE cart ------------------------------ */
 // Any registered user can update their cart
 router.put('/:id', verifyTokenAndAuthorization, async(req, res) => {
     try {
@@ -33,7 +33,7 @@ router.put('/:id', verifyTokenAndAuthorization, async(req, res) => {
     }
 })
 
-// DELETE (empty) cart
+/* --------------------------- DELETE (empty) cart -------------------------- */
 // Any registered user can delete their cart
 router.delete('/:id', verifyTokenAndAuthorization, async(req, res) => {
     try {
@@ -44,7 +44,7 @@ router.delete('/:id', verifyTokenAndAuthorization, async(req, res) => {
     }
 });
 
-// GET cart by user id
+/* --------------------------- GET cart by user id -------------------------- */
 router.get('/find/:userId', verifyTokenAndAuthorization, async(req, res) => {
     try {
         // Find cart that matches condition of userId matching parameter 
@@ -58,7 +58,7 @@ router.get('/find/:userId', verifyTokenAndAuthorization, async(req, res) => {
     }
 });
 
-// GET all carts
+/* ------------------------------ GET all carts ----------------------------- */
 router.get('/', verifyTokenAndAdmin, async(req, res) => {
     try {
         const carts = await Cart.find();

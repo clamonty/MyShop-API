@@ -2,7 +2,7 @@ const router = require('express').Router();
 const {verifyTokenAndAuthorization, verifyTokenAndAdmin} = require('./tokenVerification');
 const User = require('../models/User');
 
-// UPDATE user
+/* ------------------------------- UPDATE user ------------------------------ */
 router.put("/:id", verifyTokenAndAuthorization, async (req, res) => {
     // If password accidentally sent, encrypt it 
     if (req.body.password) {
@@ -27,7 +27,7 @@ router.put("/:id", verifyTokenAndAuthorization, async (req, res) => {
   }
 });
 
-// DELETE user
+/* ------------------------------- DELETE user ------------------------------ */
 router.delete("/:id", verifyTokenAndAuthorization, async (req, res) => {
     try {
         await User.findByIdAndDelete(req.params.id);
@@ -37,7 +37,7 @@ router.delete("/:id", verifyTokenAndAuthorization, async (req, res) => {
     }
 });
 
-// GET user with specific id
+/* ------------------------ GET user with specific id ----------------------- */
 // Only able to be done if sender has admin jwt token
 router.get("/find/:id", verifyTokenAndAdmin, async (req, res) => {
     try {
@@ -51,7 +51,7 @@ router.get("/find/:id", verifyTokenAndAdmin, async (req, res) => {
     }
 });
 
-// GET all users
+/* ------------------------------ GET all users ----------------------------- */
 // Only able to be done by admin
 router.get("/find/", verifyTokenAndAdmin, async(req, res) => {
     const query = req.query.new;
@@ -68,7 +68,7 @@ router.get("/find/", verifyTokenAndAdmin, async(req, res) => {
     }
 });
 
-// GET user statistics
+/* --------------------------- GET user statistics -------------------------- */
 router.get("/stats", verifyTokenAndAdmin, async (req, res) => {
     const date = new Date();
     // Get the last year as a variable

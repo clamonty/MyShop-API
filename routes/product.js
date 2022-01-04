@@ -3,7 +3,7 @@ const {verifyToken, verifyTokenAndAuthorization, verifyTokenAndAdmin} = require(
 const Product = require('../models/Product');
 
 
-// POST create new product
+/* ------------------------- POST create new product ------------------------ */
 router.post('/', verifyTokenAndAdmin, async(req,res) => {
     // Make new product
     const newProduct = new Product(req.body);
@@ -17,7 +17,7 @@ router.post('/', verifyTokenAndAdmin, async(req,res) => {
     }
 });
 
-// GET all products
+/* ---------------------------- GET all products ---------------------------- */
 router.get('/', async (req, res) => {
     // Queries for different product fetching
     const newQuery = req.query.new;
@@ -46,7 +46,7 @@ router.get('/', async (req, res) => {
     }
 })
 
-// GET product by ID
+/* ---------------------------- GET product by ID --------------------------- */
 router.get('/find/:id', async(req, res) => {
     try {
         // Look for the specific product
@@ -63,7 +63,7 @@ router.get('/find/:id', async(req, res) => {
     }
 });
 
-// UPDATE product
+/* ----------------------------- UPDATE product ----------------------------- */
 // Only doable by admin
 router.put('/update/:id', verifyTokenAndAdmin, async(req, res) => {
     try {
@@ -80,7 +80,7 @@ router.put('/update/:id', verifyTokenAndAdmin, async(req, res) => {
     }
 });
 
-// DELETE product
+/* ----------------------------- DELETE product ----------------------------- */
 // Only doable by admin
 router.delete('/:id', verifyTokenAndAdmin, async(req, res) => {
     try {

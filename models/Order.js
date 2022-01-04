@@ -6,7 +6,6 @@ const orderSchema = new mongoose.Schema(
         userId: {
             type: String,
             required: true,
-            unique: true,
         },
         // Items purchased in order
         products: [
@@ -35,7 +34,8 @@ const orderSchema = new mongoose.Schema(
             type: String,
             default: "pending"
         }
-    }
+    },
+    {timestamps: true}
 )
 
 module.exports = mongoose.model("Order", orderSchema);
